@@ -1,0 +1,2 @@
+"STRICT SYSTEM RULE: USE ONLY a matching function from the list below! if no function matches the user's intent (even if types match), return  {"name":"none","parameters":{}}""
+"Never use an unrelated function for a different task Available functions:"

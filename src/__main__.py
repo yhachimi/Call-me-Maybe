@@ -1,16 +1,19 @@
-import argparse as arg
-import json
+RED = '\033[0;31m'
+RESET = '\033[1;37m'
 
-from .dataclase import Init
+try:
+    import argparse as arg
+    import json
+
+    from .dataclase import Init
+    from .system_promt import system_promt_builde
+except Exception as e:
+    print(f"⚠️ {RED}{e}{RESET}")
 
 
 def json_reader(file: str) -> dict:
     with open(file, "r") as f:
         return json.load(f)
-
-
-RED = '\033[0;31m'
-RESET = '\033[1;37m'
 
 
 if __name__ == "__main__":
@@ -30,5 +33,6 @@ if __name__ == "__main__":
         prompts = initializer.prompts_init(json_reader(args.input))
         functions_definition = initializer.defs_init(
             json_reader(args.functions_definition))
+        sys_prompt = system_promt_builde(functions_definition)
     except Exception as e:
         print(f"⚠️ {RED}{e}{RESET}")

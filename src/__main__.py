@@ -2,6 +2,8 @@ RED = '\033[0;31m'
 RESET = '\033[1;37m'
 BLUE = "\033[34m"
 GREEN = "\033[92m"
+GRAY = '\033[37m'
+
 try:
     import argparse as arg
     import json
@@ -65,7 +67,11 @@ def get_next_id(logits: list[float], valid_ids: list[int]) -> int:
 
 if __name__ == "__main__":
     try:
-
+        with open("src/logo", "r") as f:
+            logo = f.read().splitlines()
+            for l in logo:
+                print(l)
+                sleep(0.02)
         parsargs = arg.ArgumentParser()
         parsargs.add_argument(
             "--output",
@@ -114,8 +120,8 @@ if __name__ == "__main__":
         creat_folder(args.output)
         with open(args.output, "w") as file:
             json.dump(outputs, file, indent=2)
-        print(f"Output Created in {args.output}")
-        print(f"Done in {total:.2f} minutes")
+        animated_output(f"Output Created in {args.output}", GRAY)
+        animated_output(f"Done in {total:.2f} minutes", GRAY)
     except Exception as e:
         print(f"⚠️ {RED}{e}{RESET}")
     except KeyboardInterrupt:
